@@ -1,4 +1,0 @@
-omnes
-=====
-
-Js omnes
