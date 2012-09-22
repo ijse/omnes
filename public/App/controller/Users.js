@@ -4,7 +4,7 @@ Ext.define('Omnes.controller.Users', {
 
 	views: ['user.List', 'user.Edit' ],
 	stores: ["Users"],
-	models: ["User"],
+	//models: ["User"],
 
 	init: function() {
 		console.log("Initialized Users! This happends before the Application launch function is called!");

@@ -3,9 +3,9 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http');
+var express = require('express'),
+    routes = require('./routes'),
+    http = require('http');
 
 var app = express();
 
@@ -26,6 +26,19 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+
+app.get('/data/category.do', function(req, resp) {
+  if(req.param("id") == "root") {
+    resp.json([
+        { text: "sub1", id:"xxx" },
+        { text: "sub11", leaf: true  }
+      ]
+    );
+  } else {
+    resp.json([{text: "sss", leaf: true }, {text: "sub2", leaf: true },
+          {text: "sub3", leaf: true }]);
+  }
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
