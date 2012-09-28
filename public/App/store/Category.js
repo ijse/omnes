@@ -9,10 +9,10 @@ Ext.define("Omnes.store.Category", {
 	proxy: {
 		type: "ajax",
 		api: {
-			create: "",
+			create: "data/category/add.json",
 			read: "data/category/list.json",
-			update: "",
-			destroy: ""
+			update: "data/category/update.json",
+			destroy: "data/category/delete.json"
 		}
 	}
 });

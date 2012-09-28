@@ -1,0 +1,42 @@
+
+
+
+
+
+
+/*
+ * Icon styles
+ */
+.category-new {
+    background: url('../images/new.png') no-repeat;
+}
+.category-new-folder {
+    background-image: url('../images/new_folder.png');
+}
+.category-new-item {
+    background-image: url('../images/new_list.png');
+}
+.category-delete-task {
+    background-image: url('../images/delete_task.png');
+}
+.category-delete-item {
+    background-image: url('../images/delete_list.png');
+}
+.category-delete-folder {
+    background-image: url('../images/delete_folder.png');
+}
+.category-mark-complete {
+    background-image: url('../images/mark_complete.png');
+}
+.category-mark-active {
+    background-image: url('../images/mark_active.png');
+}
+.category-show-all {
+    background-image: url('../images/show_all.png');
+}
+.category-show-active {
+    background-image: url('../images/show_active.png');
+}
+.category-show-complete {
+    background-image: url('../images/show_complete.png');
+}

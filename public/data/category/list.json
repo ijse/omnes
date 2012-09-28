@@ -1,0 +1,28 @@
+{
+    "expanded": true,
+    "children": [
+        {
+            "title": "detention",
+            "leaf": true
+        },
+        {
+            "title": "homework",
+            "expanded": true,
+            "children": [
+                {
+                	"title": "haha",
+                    "title": "book report",
+                    "leaf": true
+                },
+                {
+                    "title": "alegrbra",
+                    "leaf": true
+                }
+            ]
+        },
+        {
+            "title": "buy lottery tickets",
+            "leaf": true
+        }
+    ]
+}
