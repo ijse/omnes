@@ -1,15 +1,18 @@
 Ext.define("Omnes.store.Category", {
 	extend: "Ext.data.TreeStore",
+	model: "Omnes.model.Category",
 	autoLoad: true,
 	root: {
-        text: 'ExtJS'
+        title: "Omnes",
+        expanded: true
     },
 	proxy: {
 		type: "ajax",
-		url: "data/category.do",
-		reader: {
-			type: "json",
-			successProperty: "success"
+		api: {
+			create: "",
+			read: "data/category/list.json",
+			update: "",
+			destroy: ""
 		}
 	}
 });

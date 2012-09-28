@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
-    	<script type="text/javascript" src="extjs/ext-debug.js"></script>
-    	<script type="text/javascript" src="app.js"></script>
-    	
+		<meta charset="utf-8" />
 		<title>Hello Omnes</title>
+		<style type="text/css">
+			#loading {
+				height: 100px;
+				margin: 100px 200px;			
+				font-size: 32px;
+				font-weight: bold;
+			}
+		</style>
 	</head>
+	<body>
+		<div id="loading">
+			<span>Loading <i id="loading-text">stylesheet</i>...</span>
+		</div>
+
+		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="resource/css/omnes.css" />
+
+		<script type="text/javascript">
+			document.getElementById("loading-text").innerText = "extjs lib";
+		</script>
+		
+    	<script type="text/javascript" src="extjs/ext-debug.js"></script>
+
+    	<script type="text/javascript">
+			document.getElementById("loading-text").innerText = "app";
+		</script>
+    	<script type="text/javascript" src="app.js"></script>
+
+	</body>
 </html>
