@@ -2,6 +2,7 @@ Ext.define("Omnes.store.Category", {
 	extend: "Ext.data.TreeStore",
 	model: "Omnes.model.Category",
 	autoLoad: true,
+	autoSync: true,
 	root: {
         title: "Omnes",
         expanded: true
