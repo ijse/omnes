@@ -17,28 +17,21 @@ module.exports = function(app, path) {
 
 	app.post(path + "/add", function(req, res) {
 		
-		var arr = res.body;
+		var arr = req.body;
+		console.log("arr>>", arr);
 		if(!(arr instanceof Array)) {
 			arr = [arr];
 		}
 
-		
+		for( var i = 0; i<arr.length; i++ ) {
+			var val = arr[i];
+			console.log(val);
+			var model = new Category(val);
+			model.save();
+		}
 
-
-		arr.every(function(val, index, arr) {
-			var model = new Category(req.body);
-			model.save(function(err) {
-				if(err) {
-					res.send({
-						success: false,
-						error: "Some Error Happened"
-					});
-				} else {
-					res.send({
-						success: true
-					});
-				}
-			});
+		res.send({
+			success: true
 		});
 	});
 

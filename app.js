@@ -3,10 +3,9 @@
  * Some Configuration to Express
  */
 
-var express = require('express'),
-    routes = require('./routes');
+var express = require('express');
 
-var app = module.exports = express();
+var app = express();
 
 app.configure(function(){
   app.set('nodeport', process.env.NODEPORT || 3001);
@@ -24,7 +23,4 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-// ~~
-routes(app, "");
-
-
+module.exports = app;

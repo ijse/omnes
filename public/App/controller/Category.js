@@ -179,6 +179,8 @@ Ext.define('Omnes.controller.Category', {
 					expanded: true,
 					loaded: true // Prevent tree to dynamic load it's children
 				});
+				parentList.appendChild(newList);
+				// 同步到服务器数据库
 				categoryStore.sync({
 					failure: function(batch, options) {
 						var error = batch.exceptions[0].getError();
@@ -192,7 +194,6 @@ Ext.define('Omnes.controller.Category', {
 						});
 					}
 				});
-				parentList.appendChild(newList);
 			}
 		});
 	},
