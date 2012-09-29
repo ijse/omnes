@@ -9,8 +9,8 @@ Ext.define("Omnes.store.Category", {
 	proxy: {
 		type: "ajax",
 		api: {
-			create: "data/category/add.json",
-			read: "data/category/list.json",
+			create: "category/add",
+			read: "category/list",
 			update: "data/category/update.json",
 			destroy: "data/category/delete.json"
 		}
