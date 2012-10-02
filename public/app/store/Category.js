@@ -4,6 +4,7 @@ Ext.define("Omnes.store.Category", {
 	autoLoad: true,
 	root: {
         title: "Omnes",
+		id: -1,
         expanded: true
     }
 });

@@ -3,7 +3,7 @@
  *
  * 全局的配置选项
  */
-app_settings = {
+OmnesSettings= {
     appName: "Omnes Project"
 };
 

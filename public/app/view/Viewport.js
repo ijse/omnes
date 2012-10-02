@@ -9,7 +9,7 @@ Ext.define("Omnes.view.Viewport", {
 		padding: "20",
 		frame: true,
 		border: false,
-		html: '<h1 class="x-panel-header">' + app_settings.appName + '</h1>'
+		html: '<h1 class="x-panel-header">' + OmnesSettings.appName + '</h1>'
 	}, {
         region: 'west',
         xtype: "category"
