@@ -19,6 +19,8 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
+app.log = require("sys").log;
+
 app.configure('development', function(){
   app.use(express.errorHandler());
 });

@@ -10,22 +10,24 @@ module.exports = function(app, path) {
 	 * 获取某个结点下的子结点
 	 */
 	app.get(path + "/list", function(req, res) {
+		var node = req.param("node");
+		console.log("node: ", node);	
 		//res.sendfile("data/category/list.json");
 		//res.send("OK!! that works!!");
-		Category.find(function(err, clist) {
+		Category.find({ parentId:node }, function(err, clist) {
 			res.send(clist);
 		});
 	});
 
-	app.post(path + "/add", function(req, res) {
+	app.post(path + "/save", function(req, res) {
 		var arr = req.body;
 		if(!(arr instanceof Array)) {
 			arr = [arr];
 		}
-
-		for( var i = 0; i<arr.length; i++ ) {
+		var i = 0;
+		for(; i<arr.length; i++ ) {
 			var val = arr[i];
-			delete val._id;
+			val._id = null;
 			var model = new Category(val);
 			model.save();
 		}
@@ -35,4 +37,27 @@ module.exports = function(app, path) {
 		});
 	});
 
+	app.post(path + "/delete", function(req, res) {
+		var arr = req.body;
+		if(!(arr instanceof Array)) {
+			arr = [arr];
+		}
+		var i = 0;
+		for(; i<arr.length; i++) {
+			var val = arr[i];
+			Category.find({ "_id": val._id}, function(err, model) {
+				if(!err) {
+					model.remove(function(err2) {
+						if(!err2) 
+							res.send({ success: true });
+						else
+							res.send({ success: false });
+					});
+				} else {
+					res.send({ success: false });	
+				}
+			});
+		};
+		
+	});
 };

@@ -3,17 +3,18 @@
  */
 Ext.define("Omnes.model.Category", {
 	extend: "Ext.data.Model",
+	idProperty: "_id",
 	fields: [
-		{ name: "_id", type: "int" },
+		{ name: "_id", type: "string" },
 		{ name: "title", type: "string" }
 	],
 	proxy: {
 		type: "ajax",
 		api: {
-			create: "category/add",
+			create: "category/save",
 			read: "category/list",
-			update: "data/category/update.json",
-			destroy: "data/category/delete.json"
+			update: "category/save",
+			destroy: "category/delete"
 		}
 	}
 });
