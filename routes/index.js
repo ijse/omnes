@@ -1,13 +1,19 @@
 /*
  * GET home page.
  */
-var CategoryController = require("./category");
 var modelMgr = require("../models");
 var app = require("../app");
 var path = "";
 
-app.get(path + "/", function(req, res) {
-	res.redirect("/index.html");
+var CategoryController = require("./category");
+var UserController = require("./user");
+
+
+app.get(/\/(index|index.html|index.htm)?$/, function(req, res) {
+	// res.redirect("/index.html");
+	res.render("index", {
+		logined: !!req.session.user
+	});
 });
 
 app.get(path + "/testdb", function(req, res) {
@@ -26,4 +32,13 @@ app.get(path + "/testdb", function(req, res) {
 	res.send("Finish!!");
 });
 
+app.get(path + "/testDel", function(req, res) {
+	var Category = modelMgr.getModel("Category");
+	Category.findOneAndRemove({ _id: '506c7c09a2e207a41d000001' }, function(err, result) {
+		console.log(arguments);
+		res.send({ success: true });
+	});
+})
+
+UserController(app, "/user");
 CategoryController(app, "/category");

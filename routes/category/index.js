@@ -7,7 +7,7 @@ var Category = modelMgr.getModel("Category");
 module.exports = function(app, path) {
 	
 	/**
-	 * 获取某个结点下的子结点
+	 * Get categories
 	 */
 	app.get(path + "/list", function(req, res) {
 		var node = req.param("node");
@@ -19,45 +19,68 @@ module.exports = function(app, path) {
 		});
 	});
 
+	/**
+	 * Save categories or folder
+	 */
 	app.post(path + "/save", function(req, res) {
 		var arr = req.body;
 		if(!(arr instanceof Array)) {
 			arr = [arr];
 		}
-		var i = 0;
-		for(; i<arr.length; i++ ) {
-			var val = arr[i];
-			val._id = null;
-			var model = new Category(val);
-			model.save();
-		}
-
-		res.send({
-			success: true
+		var count = arr.length;
+		arr.forEach(function(doc) {
+			doc._id = null;
+			Category.create(doc, function(err) {
+				if(err) {
+					next(err);
+				} else if(--count === 0) {
+					res.send({ success: true });
+				}
+			});
 		});
 	});
 
+	/**
+	 * Update(Rename, sort) tree nodes
+	 */
+	app.post(path + "/update", function(req, res) {
+		var arr = req.body;
+		if(!(arr instanceof Array)) {
+			arr = [arr];
+		}
+		var count = arr.length;
+		arr.forEach(function(doc) {
+			Category.findByIdAndUpdate(doc._id, {title: doc.title}, function(err) {
+				if(err) {
+					next(err);
+				} else if(--count === 0) {
+					res.send({ success: true });
+				}
+			});
+		});
+	});
+
+	/**
+	 * Delete a item or folder
+	 */
 	app.post(path + "/delete", function(req, res) {
 		var arr = req.body;
 		if(!(arr instanceof Array)) {
 			arr = [arr];
 		}
-		var i = 0;
-		for(; i<arr.length; i++) {
-			var val = arr[i];
-			Category.find({ "_id": val._id}, function(err, model) {
-				if(!err) {
-					model.remove(function(err2) {
-						if(!err2) 
-							res.send({ success: true });
-						else
-							res.send({ success: false });
-					});
-				} else {
-					res.send({ success: false });	
+
+		var count = arr.length;
+		arr.forEach(function(doc) {
+			console.log("delete _id: ", doc._id);
+			Category.findByIdAndRemove(doc._id, function(err) {
+				console.log(err, "|", count);
+				if(err) {
+					next(err);
+				} else if(--count === 0) {
+					res.send({ success: true });
 				}
 			});
-		};
+		});
 		
 	});
 };

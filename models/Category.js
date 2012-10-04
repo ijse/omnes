@@ -1,12 +1,11 @@
 
 var mongoose = require("mongoose");
+var ObjectId = mongoose.Types.ObjectId;
 
 var schema = mongoose.Schema({
-	_id: "string",
-	id: "string",
-	parentId: "string",
-	title: "string",
-	leaf: "boolean"
+	parentId: String,
+	title: String,
+	leaf: Boolean
 });
 
 schema.methods.test = function() {

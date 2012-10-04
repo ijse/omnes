@@ -4,11 +4,66 @@
 		<meta charset="utf-8" />
 		<title>Hello Omnes</title>
 	<body>
+		<!-- 
 		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
 
-    	<script type="text/javascript" src="extjs/ext-debug.js"></script>
+    	<script src="extjs/ext-debug.js"></script>
+    	<script src="test.js"></script> 
+    	-->
 
-    	<script type="text/javascript" src="test.js"></script>
+		<div class="wrap">
+			<div class="loginBox">
+				<p><label for="login-uname">UserName:</label><input type="text" id="login-uname"></p>
+				<p><label for="login-upass">PassWord:</label><input type="text" id="login-upass"></p>
+				<div><input type="button" value="login"></div>
+			</div>
+			<div class="signinBox">
+				<p><label for="signin-uname">UserName:</label><input type="text" id="signin-uname"></p>
+				<p><label for="signin-upass">PassWord:</label><input type="text" id="signin-upass"></p>
+				<p><label for="signin-vpass">Verify Password:</label><input type="text" id="signin-vpass"></p>
+				<p><label for="signin-email">Email:</label><input type="text" id="signin-email"></p>
+				<div><input type="button" value="sigin"></div>
+			</div>
+		</div>
+
+		<script> 
+			(function() {
+				var xhrCon = new XHConn();
+				function doSiginIn() {
+					var $$=document.getElementById;
+					// Get form data
+					var obj = {
+						name: $$("signin-uname").value,
+						pass: $$("signin-upass").value,
+						pass2: $$("signin-vpass").value,
+						email: $$("signin-email").value
+					};
+					var p = params(obj);
+					// Validate
+
+					var testStr1 = "name=xxx&pass=aaa&pass2=aaa&email=i@ijser.cn";
+					xhrCon.connect("/user/signin", "post", p, function(rp) {
+						var data = eval("(" + rp.responseText + ")");
+						if(data.success == true) {
+							// Sigin in success, login
+						} else {
+							// fail
+
+						}
+					});
+				}
+
+				function params(obj) {
+					var i, r="";
+					for(i in obj) {
+						var v = obj[i];
+						r = i + "=" + v + "&";
+					}
+					return r;
+				}
+
+			})()
+		 </script>
 	</body>
 </html>

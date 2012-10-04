@@ -1,9 +1,64 @@
+/**
+ * Init page
+ */
+body {
+    color: #666;
+    background: white url("../images/bg.gif") repeat-x;
+}
+#logo {
+    margin-top: 60px;
+    text-align: center;
+}
+#logo h1 {
+    color: #666;
+    font-size: 48px;
+    text-shadow: #000 1px 1px 150px;
+}
+#auth-wrap {
+    width: 700px;
+    margin: 100px auto;
+    font-size: 12px;
+    line-height: 18px;
+}
+#auth-wrap p {
+    margin: 20px 0;
+}
+#auth-wrap label {
+    width: 60px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: right;
+    text-shadow: #000 1px 1px 10px;
+    vertical-align: middle;
+}
+#auth-wrap input {
+    width: 200px; height: 36px;
+    margin: 0 10px; padding: 6px;
+    border: 1px solid #777;
+    line-height: 18px;
+    font-size: 18px;
+    text-shadow: #999 1px 1px 5px;
+    border-radius: 5px;
+}
+#auth-wrap #login-go, #auth-wrap #signin-go {
+    width: 60px; height: 30px;  
+    margin: 10px auto;
+    padding: 4px 7px;
+    display: block; 
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+}
 
-
-
-
-
-
+#auth-wrap .loginBox {
+    width: 300px;
+    float: left; 
+    margin-top: 60px;
+}
+#auth-wrap .signinBox {
+    width: 300px;
+    float: right; 
+}
 /*
  * Icon styles
  */

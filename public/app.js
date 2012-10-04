@@ -17,11 +17,15 @@ Ext.application({
 
     // 程序基础目录
     appFolder: 'app',
-    autoCreateViewport: true,
+    autoCreateViewport: false,
     controllers: ["Category"],
 
-    launch: function() {
-        //
-
+    init: function() {
+        // ....
+        document.getElementById("loading-text").innerText = "Ready to go!";
+        window.initApp = function() {
+            // Create viewport
+            Ext.create("Omnes.view.Viewport");
+        }
     }
 });

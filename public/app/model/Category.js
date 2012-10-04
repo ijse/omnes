@@ -13,7 +13,7 @@ Ext.define("Omnes.model.Category", {
 		api: {
 			create: "category/save",
 			read: "category/list",
-			update: "category/save",
+			update: "category/update",
 			destroy: "category/delete"
 		}
 	}
