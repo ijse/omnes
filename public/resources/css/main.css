@@ -40,11 +40,16 @@ body {
     text-shadow: #999 1px 1px 5px;
     border-radius: 5px;
 }
+#auth-wrap input:focus {
+    border: 1px solid #31C2B1;
+    box-shadow: #31C2B1 1px 1px 10px;
+}
 #auth-wrap #login-go, #auth-wrap #signin-go {
     width: 60px; height: 30px;  
     margin: 10px auto;
     padding: 4px 7px;
     display: block; 
+    cursor: pointer;
     font-size: 14px;
     font-weight: bold;
     border-radius: 5px;
@@ -58,6 +63,10 @@ body {
 #auth-wrap .signinBox {
     width: 300px;
     float: right; 
+}
+
+.ux-header {
+    font-size: 32px;
 }
 /*
  * Icon styles

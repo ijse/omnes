@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Omnes Project</title>
+		<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+	</head>
+	<body>
+		<div id="logo">
+			<h1>Omnes Project</h1>
+			<div id="loading">
+				<span id="loading-text">Loading stylesheet</span>
+			</div>
+		</div>
+		<% if(!logined) { %>
+		<!-- Login and Signin Box  -->
+		<% include frags/authBox.htm %>
+		<% include frags/authjs.htm %>
+		<!-- End Signin or Login -->
+		<% } %>
+		
+		<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all-gray.css" />
+
+		<script type="text/javascript">
+			document.getElementById("loading-text").innerText = "Loading base lib";
+		</script>
+		
+    	<script src="extjs/ext-debug.js"></script>
+
+    	<script type="text/javascript">
+			document.getElementById("loading-text").innerText = "Loading application";
+		</script>
+    	<script src="app.js"></script>
+    	<% if(logined) { %>
+    	<script>
+    		var t = setInterval(function() {
+    			if(window.initApp) {
+    				clearInterval(t);
+    				window.initApp();
+    			}
+    		}, 500);
+    	</script>
+    	<% } %>
+
+	</body>
+</html>

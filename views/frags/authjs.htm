@@ -1,0 +1,70 @@
+<script src="XHCon.js"></script>
+<script> 
+	(function() {
+		
+		var $$= function() {
+			return document.getElementById.apply(document, arguments);
+		};
+		$$("signin-go").onclick = function() {
+			var xhrCon = new XHConn();
+			// Get form data
+			var obj = {
+				name: $$("signin-uname").value,
+				pass: $$("signin-upass").value,
+				pass2: $$("signin-vpass").value,
+				email: $$("signin-email").value
+			};
+			var p = params(obj);
+			// Validate
+			xhrCon.connect("/user/signin", "POST", p, function(rp) {
+				var data = eval("(" + rp.responseText + ")");
+				if(data.success == true) {
+					// Sigin in success, login
+					// Try to initApp() until it loaded up!
+					var t = setInterval(function() {
+						if(window.initApp) {
+							clearInterval(t);
+							window.initApp();
+						}
+					}, 500);
+				} else {
+					// Fail
+					alert("Signin Fail!!");
+				}
+			});
+		}
+		$$("login-go").onclick = function() {
+			var xhrCon = new XHConn();
+			var obj = {
+				name: $$("login-uname").value,
+				pass: $$("login-upass").value
+			};
+			var p = params(obj);
+			xhrCon.connect("/user/login", "POST", p, function(rp) {
+				var data = eval("(" + rp.responseText + ")");
+				if(data.success == true) {
+					$$("auth-wrap").innerHTML="";
+					var t = setInterval(function() {
+						if(window.initApp) {
+							clearInterval(t);
+							window.initApp();
+						}
+					}, 500);
+				} else {
+					// Fail
+					alert("Login Fail!!");
+				}
+			});
+		}
+
+		function params(obj) {
+			var i, r="";
+			for(i in obj) {
+				var v = obj[i];
+				r = r + i + "=" + v + "&";
+			}
+			return r.replace(/&$/, "");
+		}
+
+	})()
+ </script>
