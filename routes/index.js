@@ -16,6 +16,11 @@ app.get(/\/(index|index.html|index.htm)?$/, function(req, res) {
 	});
 });
 
+app.get("/frags/:fragName", function(req, res) {
+	var fragName = req.param("fragName");
+	res.sendfile("views/frags/" + fragName);
+})
+
 app.get(path + "/testdb", function(req, res) {
 	// var modelsMgr = app.get("models");
 	var Category = modelMgr.getModel("Category");

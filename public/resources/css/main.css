@@ -65,9 +65,13 @@ body {
     float: right; 
 }
 
-.ux-header {
-    font-size: 32px;
-}
+/* Functions */
+.fn-right { float: right; }
+.fn-left { float: left; }
+.fn-font32 { font-size: 32px; }
+.fn-font24 { font-size: 24px; }
+
+
 /*
  * Icon styles
  */

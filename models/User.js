@@ -8,8 +8,11 @@ var schema = mongoose.Schema({
 	email: String
 });
 
-schema.methods.login = function(uname, upass) {
-	
+schema.statics.login = function(uname, upass) {
+	return this.find({
+		name: uname,
+		pass: upass
+	});
 };
 
 module.exports = schema;

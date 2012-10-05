@@ -1,6 +1,7 @@
 
 Ext.define("Omnes.view.Viewport", {
 	extend: 'Ext.container.Viewport',
+    requires: [ "Omnes.ux.AjaxLoadHtml"],
     height: "100%",
     width: "100%",
     layout: "border",
@@ -10,16 +11,25 @@ Ext.define("Omnes.view.Viewport", {
 		padding: "10",
 		frame: true,
 		border: false,
-		html: '<h1 class="ux-header">' + OmnesSettings.appName + '</h1>'
+        plugins: {
+            ptype: 'ajaxloadhtml'
+        },
+        url: "/frags/nav.htm"
+        /*,
+		html: '<h1 class="fn-font32">' + OmnesSettings.appName + '</h1>' + 
+                '<div class="fn-right"><a href="/user/logout">Logout</a></div>'
+         */
 	}, {
         region: 'west',
+        width: 300,
+        title: "目录树",
         xtype: "category"
     }, {
         region: 'east',
-        title: 'East Panel',
+        title: '信息面板',
         collapsible: true,
         split: true,
-        width: 150
+        width: 300
     }, {
         region: 'center',
         layout: {
@@ -30,17 +40,15 @@ Ext.define("Omnes.view.Viewport", {
             region: "center",
             width: "100%",
             xtype: 'tabpanel',
-            // TabPanel itself has no title
             activeTab: 0,
-            // First tab active by default
             items: {
-                title: 'Default Tab',
+                title: '欢迎页',
                 html: 'The first tab\'s content. Others may be added dynamically'
             }
         }, {
             region: 'south',
             width: "100%",
-            title: 'South Panel',
+            title: '附件信息',
             collapsible: true,
             html: 'Information goes here',
             split: true,

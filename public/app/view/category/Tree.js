@@ -7,6 +7,11 @@ Ext.define("Omnes.view.category.Tree", {
 	extend: "Ext.tree.Panel",
 	alias: "widget.category",
 	xtype: "categoryTree",
+	requires: [
+		'Omnes.ux.DragDrop',
+		'Omnes.ux.DropZone',
+		'Ext.tree.plugin.TreeViewDragDrop'
+	],
 
 	collapsible: true,
 	title: 'Category',
@@ -17,12 +22,21 @@ Ext.define("Omnes.view.category.Tree", {
 
 	store: "Category",
 
+	viewConfig: {
+		plugins: {
+			ptype: 'categorydragdrop',
+			// ddGroup: 'task',
+			dragText: 'Drag to recorder'
+		}
+	},
+
 	columns: [{
 		xtype: 'treecolumn',
 		header: '标题',
 		dataIndex: 'title',
 		flex: 1
 	}],
+	hideHeaders: true,
 
 	dockedItems: [{
 		xtype: 'toolbar',
@@ -48,6 +62,9 @@ Ext.define("Omnes.view.category.Tree", {
 		var me = this;
 
 		this.callParent(arguments);
+
+		me.addEvents( 'listdrop' );
+		me.relayEvents(me.getView(), ['listdrop']);
 	}
 
 });

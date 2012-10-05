@@ -24,21 +24,35 @@ module.exports = function(app, path) {
 
 	});
 
+	// User logout
+	app.get(path + "/logout", function(req, res) {
+		delete req.session.user;
+		res.redirect("/");
+	});
+
 	// User login
 	app.post(path + "/login", function(req, res) {
 		var uname = req.param("name"),
 			upass = req.param("pass");
 		var response = { success: false };
-		UserModel.findOne({
-			name: uname,
-			pass: upass
-		}, function(err, doc) {
-			response.success = !!doc;
-			if(!!doc) {
-				req.session.user = doc;
+		UserModel.login(uname, upass).exec(function(err, doc) {
+			console.log(arguments, !!doc[0]);
+			if(!!doc[0]) {
+				response.success = true;
+				req.session.user = doc[0];
 			}
 			res.send(response);
-		});
+		})
+		// UserModel.findOne({
+		// 	name: uname,
+		// 	pass: upass
+		// }, function(err, doc) {
+		// 	response.success = !!doc;
+		// 	if(!!doc) {
+		// 		req.session.user = doc;
+		// 	}
+		// 	res.send(response);
+		// });
 	});
 
 

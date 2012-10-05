@@ -28,6 +28,9 @@ Ext.define('Omnes.controller.Category', {
 		var me = this;
 		this.control({
 			"categoryTree": {
+				afterrender: me.handleAfterListTreeRender,
+				// listdrop: me.reorderList,
+                selectionchange: me.loadArtical,
 				itemcontextmenu: me.showContextMenu
 			},
 			"categoryContextMenu": {
@@ -51,6 +54,57 @@ Ext.define('Omnes.controller.Category', {
 			}
 		});
 	},
+
+	loadArtical: function(selModel, lists) {
+		
+	},
+	/**
+	 * 改变顺序或从属
+	 * @param  {[type]} list     [description]
+	 * @param  {[type]} overList [description]
+	 * @param  {[type]} position [description]
+	 * @return {[type]}          [description]
+	 */
+	reorderList: function(list, overList, position) {
+		Ext.Ajax.request({
+			url: 'category/move',
+			jsonData: {
+				id: list.get("_id"),
+				relatedId: overList.get('_id'),
+				position: position // before, after, append
+			},
+			success: function(response, options) {
+				var responseData = Ext.decode(response.responseText);
+
+				if(!responseData.success) {
+				    Ext.MessageBox.show({
+				        title: 'Move Task Failed',
+				        msg: responseData.message,
+				        icon: Ext.Msg.ERROR,
+				        buttons: Ext.Msg.OK
+				    });
+				}
+			},
+			failure: function(response, options) {
+				Ext.MessageBox.show({
+				    title: 'Move Failed',
+				    msg: response.status + ' ' + response.statusText,
+				    icon: Ext.Msg.ERROR,
+				    buttons: Ext.Msg.OK
+				});
+			}
+		});
+		// refresh the lists view
+        this.getListTree().refreshView();
+	},
+
+    /**
+     * Handles the list tree's "afterrender" event
+     * Selects the lists tree's root node, if the list tree exists
+     */
+    handleAfterListTreeRender: function(listTree) {
+        listTree.getSelectionModel().select(0);
+    },
 
 	/**
 	 * Function: showContextMenu

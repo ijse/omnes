@@ -1,18 +1,15 @@
 /**
- * @class SimpleTasks.ux.DropZone
+ * @class Omnes.ux.DropZone
  * @extends Ext.tree.ViewDropZone
  * @private
  */
-Ext.define('SimpleTasks.ux.DropZone', {
+Ext.define('Omnes.ux.DropZone', {
     extend: 'Ext.tree.ViewDropZone',
 
     handleNodeDrop : function(data, overRecord, position) {
         var droppedRecord = data.records[0];
 
-        if(droppedRecord instanceof SimpleTasks.model.Task) {
-            this.cancelExpand();
-            this.fireViewEvent('taskdrop', droppedRecord, overRecord);
-        } else if(droppedRecord instanceof SimpleTasks.model.List) {
+        if(droppedRecord instanceof Omnes.model.Category) {
             this.callParent(arguments);
             this.fireViewEvent('listdrop', droppedRecord, overRecord, position);
         }
@@ -29,7 +26,7 @@ Ext.define('SimpleTasks.ux.DropZone', {
         // This allows the superclass to show the visual position indicator.
         // Otherwise if we're dragging a Task from the Task Grid, do not show the indicator, since we want
         // to give the appearance of the dragged record being dropped ON a node, not in between nodes.
-        if(data.records[0] instanceof SimpleTasks.model.List) {
+        if(data.records[0] instanceof Omnes.model.Category) {
             return me.callParent(arguments);
         }
 
