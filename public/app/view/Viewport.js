@@ -14,14 +14,14 @@ Ext.define("Omnes.view.Viewport", {
         plugins: {
             ptype: 'ajaxloadhtml'
         },
-        url: "/frags/nav.htm"
+        url: "/frags/nav.ejs"
         /*,
-		html: '<h1 class="fn-font32">' + OmnesSettings.appName + '</h1>' + 
+		html: '<h1 class="fn-font32">' + OmnesSettings.appName + '</h1>' +
                 '<div class="fn-right"><a href="/user/logout">Logout</a></div>'
          */
 	}, {
         region: 'west',
-        width: 300,
+        width: 500,
         title: "目录树",
         xtype: "category"
     }, {

@@ -5,7 +5,14 @@ var ObjectId = mongoose.Types.ObjectId;
 var schema = mongoose.Schema({
 	parentId: String,
 	title: String,
-	leaf: Boolean
+	leaf: Boolean,
+	lastModify: {
+		"type": Date
+	},
+	sortNo: {
+		"type": Number,
+		"default": 0
+	}
 });
 
 schema.methods.test = function() {

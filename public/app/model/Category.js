@@ -6,7 +6,9 @@ Ext.define("Omnes.model.Category", {
 	idProperty: "_id",
 	fields: [
 		{ name: "_id", type: "string" },
-		{ name: "title", type: "string" }
+		{ name: "title", type: "string" },
+		{ name: "lastModify", type: "date", value: new Date() },
+		{ name: "sortNo", type: "number" }
 	],
 	proxy: {
 		type: "ajax",

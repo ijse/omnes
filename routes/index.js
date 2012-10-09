@@ -11,15 +11,14 @@ var UserController = require("./user");
 
 app.get(/\/(index|index.html|index.htm)?$/, function(req, res) {
 	// res.redirect("/index.html");
-	res.render("index", {
-		logined: !!req.session.user
-	});
+	res.render("index");
 });
 
 app.get("/frags/:fragName", function(req, res) {
 	var fragName = req.param("fragName");
-	res.sendfile("views/frags/" + fragName);
-})
+	console.log(":fragName", fragName);
+	res.render("frags/" + fragName);
+});
 
 app.get(path + "/testdb", function(req, res) {
 	// var modelsMgr = app.get("models");
@@ -43,7 +42,7 @@ app.get(path + "/testDel", function(req, res) {
 		console.log(arguments);
 		res.send({ success: true });
 	});
-})
+});
 
 UserController(app, "/user");
 CategoryController(app, "/category");

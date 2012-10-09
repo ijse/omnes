@@ -13,7 +13,7 @@
 				<span id="loading-text">Loading stylesheet</span>
 			</div>
 		</div>
-		<% if(!logined) { %>
+		<% if(!Session.user) { %>
 		<!-- Login and Signin Box  -->
 		<% include frags/authBox.htm %>
 		<% include frags/authjs.htm %>
@@ -30,7 +30,7 @@
 			document.getElementById("loading-text").innerText = "Loading application";
 		</script>
     	<script src="app.js"></script>
-    	<% if(logined) { %>
+    	<% if(Session.user) { %>
     	<script>
     		var t = setInterval(function() {
     			if(window.initApp) {

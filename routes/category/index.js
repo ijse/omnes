@@ -30,6 +30,7 @@ module.exports = function(app, path) {
 		var count = arr.length;
 		arr.forEach(function(doc) {
 			doc._id = null;
+			doc.lastModify = new Date();
 			Category.create(doc, function(err) {
 				if(err) {
 					next(err);
@@ -50,7 +51,7 @@ module.exports = function(app, path) {
 		}
 		var count = arr.length;
 		arr.forEach(function(doc) {
-			Category.findByIdAndUpdate(doc._id, {title: doc.title}, function(err) {
+			Category.findByIdAndUpdate(doc._id, {title: doc.title, lastModify: new Date() }, function(err) {
 				if(err) {
 					next(err);
 				} else if(--count === 0) {

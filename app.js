@@ -25,6 +25,12 @@ app.configure(function(){
       secret: "Omnes Project"
   }));
   app.use(express.methodOverride());
+  app.use(function(req, res, next) {
+    res.locals({
+      "Session": req.session
+    });
+    next();
+  });
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });

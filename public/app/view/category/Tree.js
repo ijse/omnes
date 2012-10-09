@@ -35,8 +35,14 @@ Ext.define("Omnes.view.category.Tree", {
 		header: '标题',
 		dataIndex: 'title',
 		flex: 1
+	}, {
+		xtype:'datecolumn',
+		header: '最后更新',
+		dataIndex: 'lastModify',
+		format:'Y-m-d H:i:s',
+		width: 150
 	}],
-	hideHeaders: true,
+	hideHeaders: false,
 
 	dockedItems: [{
 		xtype: 'toolbar',

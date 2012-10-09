@@ -2,17 +2,27 @@
 <script> 
 	(function() {
 		
-		var $$= function() {
-			return document.getElementById.apply(document, arguments);
+		var $$= function(select) {
+			var ya = /^([#.])(.*)$/.exec(select);
+			try {
+
+				return ya ? ({
+					"#": document.getElementById.call(document, ya[2]),
+					".": document.getElementsByClassName.call(document, ya[2])
+				}[ya[1]]) : null;
+			} catch(e) {};
 		};
-		$$("signin-go").onclick = function() {
+
+		window.$$$ = $$;
+
+		$$("#signin-go").onclick = function() {
 			var xhrCon = new XHConn();
 			// Get form data
 			var obj = {
-				name: $$("signin-uname").value,
-				pass: $$("signin-upass").value,
-				pass2: $$("signin-vpass").value,
-				email: $$("signin-email").value
+				name: $$("#signin-uname").value,
+				pass: $$("#signin-upass").value,
+				pass2: $$("#signin-vpass").value,
+				email: $$("#signin-email").value
 			};
 			var p = params(obj);
 			// Validate
@@ -29,21 +39,21 @@
 					}, 500);
 				} else {
 					// Fail
-					alert("Signin Fail!!");
+					alert("Signin Fail!! \n" + data.error);
 				}
 			});
 		}
-		$$("login-go").onclick = function() {
+		$$("#login-go").onclick = function() {
 			var xhrCon = new XHConn();
 			var obj = {
-				name: $$("login-uname").value,
-				pass: $$("login-upass").value
+				name: $$("#login-uname").value,
+				pass: $$("#login-upass").value
 			};
 			var p = params(obj);
 			xhrCon.connect("/user/login", "POST", p, function(rp) {
 				var data = eval("(" + rp.responseText + ")");
 				if(data.success == true) {
-					$$("auth-wrap").innerHTML="";
+					$$("#auth-wrap").innerHTML="";
 					var t = setInterval(function() {
 						if(window.initApp) {
 							clearInterval(t);
@@ -52,9 +62,23 @@
 					}, 500);
 				} else {
 					// Fail
-					alert("Login Fail!!");
+					alert("Login Fail!! \n" + data.error);
 				}
 			});
+		}
+
+		$$(".loginBox")[0].onkeydown = function(evt) {
+			evt = evt || window.event;
+			if(evt.keyCode === 13) {
+				$$("#login-go").onclick();
+			}
+		}
+
+		$$(".signinBox")[0].onkeydown = function(evt) {
+			evt = evt || window.event;
+			if(evt.keyCode === 13) {
+				$$("#signin-go").onclick();
+			}
 		}
 
 		function params(obj) {
