@@ -23,4 +23,3 @@ schema.methods.test = function() {
 };
 
 module.exports = schema;
-// module.exports = mongoose.model("Category", schema);

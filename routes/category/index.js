@@ -2,7 +2,6 @@
  * 目录树Controller
  */
 var modelMgr = require("../../models");
-var User = modelMgr.getModel("User");
 var Category = modelMgr.getModel("Category");
 
 module.exports = function(app, path) {
@@ -22,21 +21,24 @@ module.exports = function(app, path) {
 	/**
 	 * Save categories or folder
 	 */
-	app.post(path + "/save", function(req, res) {
+	app.post(path + "/save", function(req, res, next) {
 		var arr = req.body;
 		if(!(arr instanceof Array)) {
 			arr = [arr];
 		}
 		var count = arr.length;
-		arr.forEach(function(doc) {
-			doc._id = null;
-			doc.lastModify = new Date();
-			doc.author = req.session.user._id;
-			Category.create(doc, function(err, doc) {
+		arr.forEach(function(item) {
+			delete item._id;
+			item.lastModify = new Date();
+			item.author = req.session.user._id;
+
+			var doc = new Category(item);
+			doc.save(function(err, newDoc) {
+				console.log(newDoc);
 				if(err) {
 					next(err);
 				} else if(--count === 0) {
-					res.send({ success: true, data: doc });
+					res.send({ success: true, data: newDoc });
 				}
 			});
 		});

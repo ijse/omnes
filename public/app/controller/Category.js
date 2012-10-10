@@ -30,7 +30,7 @@ Ext.define('Omnes.controller.Category', {
 			"categoryTree": {
 				afterrender: me.handleAfterListTreeRender,
 				// listdrop: me.reorderList,
-                selectionchange: me.loadArtical,
+				selectionchange: me.loadArtical,
 				itemcontextmenu: me.showContextMenu
 			},
 			"categoryContextMenu": {
@@ -56,7 +56,7 @@ Ext.define('Omnes.controller.Category', {
 	},
 
 	loadArtical: function(selModel, lists) {
-		
+
 	},
 	/**
 	 * 改变顺序或从属
@@ -76,35 +76,35 @@ Ext.define('Omnes.controller.Category', {
 			success: function(response, options) {
 				var responseData = Ext.decode(response.responseText);
 
-				if(!responseData.success) {
-				    Ext.MessageBox.show({
-				        title: 'Move Task Failed',
-				        msg: responseData.message,
-				        icon: Ext.Msg.ERROR,
-				        buttons: Ext.Msg.OK
-				    });
+				if (!responseData.success) {
+					Ext.MessageBox.show({
+						title: 'Move Task Failed',
+						msg: responseData.message,
+						icon: Ext.Msg.ERROR,
+						buttons: Ext.Msg.OK
+					});
 				}
 			},
 			failure: function(response, options) {
 				Ext.MessageBox.show({
-				    title: 'Move Failed',
-				    msg: response.status + ' ' + response.statusText,
-				    icon: Ext.Msg.ERROR,
-				    buttons: Ext.Msg.OK
+					title: 'Move Failed',
+					msg: response.status + ' ' + response.statusText,
+					icon: Ext.Msg.ERROR,
+					buttons: Ext.Msg.OK
 				});
 			}
 		});
 		// refresh the lists view
-        this.getListTree().refreshView();
+		this.getListTree().refreshView();
 	},
 
-    /**
-     * Handles the list tree's "afterrender" event
-     * Selects the lists tree's root node, if the list tree exists
-     */
-    handleAfterListTreeRender: function(listTree) {
-        listTree.getSelectionModel().select(0);
-    },
+	/**
+	 * Handles the list tree's "afterrender" event
+	 * Selects the lists tree's root node, if the list tree exists
+	 */
+	handleAfterListTreeRender: function(listTree) {
+		listTree.getSelectionModel().select(0);
+	},
 
 	/**
 	 * Function: showContextMenu
@@ -236,6 +236,15 @@ Ext.define('Omnes.controller.Category', {
 				parentList.appendChild(newList);
 				// 同步到服务器数据库
 				categoryStore.sync({
+					success: function(batch, options) {
+						// 服务器端插入到数据库成功后，
+						// 将生成的_id传回来，更新store
+						batch.operations.forEach(function(item) {
+							var newData = Ext.JSON.decode(item.response.responseText);
+							item.getRecords()[0].data["_id"] = newData.data["_id"];
+						});
+						console.log(arguments);
+					},
 					failure: function(batch, options) {
 						var error = batch.exceptions[0].getError();
 						var msg = Ext.isObject(error) ? error.status + " " + error.statusText : error;
@@ -274,7 +283,7 @@ Ext.define('Omnes.controller.Category', {
 
 		Ext.Msg.show({
 			title: "Delete " + (isFolder ? "Folder" : "list") + "?",
-			msg: "确定删除 " + theTitle + (!isFolder ? "": "及其下的所有文件") + "吗？",
+			msg: "确定删除 " + theTitle + (!isFolder ? "" : "及其下的所有文件") + "吗？",
 			buttons: Ext.Msg.YESNO,
 			fn: function(response) {
 				if (response === "yes") {
@@ -319,7 +328,7 @@ Ext.define('Omnes.controller.Category', {
 		var theVal = item.get("title");
 
 		Ext.Msg.prompt("修改", "", function(btn, text) {
-			if(btn === "ok") {
+			if (btn === "ok") {
 				item.set("title", text);
 				categoryStore.sync({
 					failure: function(batch, options) {

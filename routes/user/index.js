@@ -40,7 +40,14 @@ module.exports = function(app, path) {
 			email: email
 		}, function(err) {
 			response.success = !! !err;
-			res.send(response);
+			// Auto login
+			UserModel.login(uname, upass).exec(function(err, doc) {
+				if (!!doc[0]) {
+					response.success = true;
+					req.session.user = doc[0];
+				}
+				res.send(response);
+			});
 		});
 
 	});
@@ -66,8 +73,7 @@ module.exports = function(app, path) {
 		}
 
 		UserModel.login(uname, upass).exec(function(err, doc) {
-			console.log(arguments, !! doc[0]);
-			if ( !! doc[0]) {
+			if (!!doc[0]) {
 				response.success = true;
 				req.session.user = doc[0];
 			}

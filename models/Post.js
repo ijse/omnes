@@ -1,11 +1,11 @@
-
 var mongoose = require("mongoose");
 var ObjectId = mongoose.Types.ObjectId;
 
 var schema = mongoose.Schema({
-	name: String,
-	pass: String,
-	email: String
+	title: String,
+	content: String,
+	createTime: String,
+	lastUpdate: String
 });
 
 schema.statics.login = function(uname, upass) {
