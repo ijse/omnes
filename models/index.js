@@ -3,9 +3,9 @@
  */
 
 //var db = require("../db");
-var db = require("mongoose").connection;
+var mongoose = require("mongoose");
 exports.getModel = function(modelName) {
 	var schema = require("./" + modelName);
-	var model = db.model(modelName, schema);
+	var model = mongoose.model(modelName, schema);
 	return model;
 };

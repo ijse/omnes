@@ -16,3 +16,4 @@ schema.statics.login = function(uname, upass) {
 };
 
 module.exports = schema;
+// module.exports = mongoose.model("User", schema);

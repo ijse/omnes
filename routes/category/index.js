@@ -2,6 +2,7 @@
  * 目录树Controller
  */
 var modelMgr = require("../../models");
+var User = modelMgr.getModel("User");
 var Category = modelMgr.getModel("Category");
 
 module.exports = function(app, path) {
@@ -11,12 +12,11 @@ module.exports = function(app, path) {
 	 */
 	app.get(path + "/list", function(req, res) {
 		var node = req.param("node");
-		console.log("node: ", node);	
-		//res.sendfile("data/category/list.json");
-		//res.send("OK!! that works!!");
-		Category.find({ parentId:node }, function(err, clist) {
-			res.send(clist);
-		});
+		Category.find({ parentId:node })
+				.populate("author")
+				.exec(function(err, clist) {
+					res.send(clist);
+				});
 	});
 
 	/**
@@ -31,11 +31,12 @@ module.exports = function(app, path) {
 		arr.forEach(function(doc) {
 			doc._id = null;
 			doc.lastModify = new Date();
-			Category.create(doc, function(err) {
+			doc.author = req.session.user._id;
+			Category.create(doc, function(err, doc) {
 				if(err) {
 					next(err);
 				} else if(--count === 0) {
-					res.send({ success: true });
+					res.send({ success: true, data: doc });
 				}
 			});
 		});
@@ -44,19 +45,30 @@ module.exports = function(app, path) {
 	/**
 	 * Update(Rename, sort) tree nodes
 	 */
-	app.post(path + "/update", function(req, res) {
+	app.post(path + "/update", function(req, res, next) {
 		var arr = req.body;
 		if(!(arr instanceof Array)) {
 			arr = [arr];
 		}
 		var count = arr.length;
 		arr.forEach(function(doc) {
-			Category.findByIdAndUpdate(doc._id, {title: doc.title, lastModify: new Date() }, function(err) {
-				if(err) {
-					next(err);
-				} else if(--count === 0) {
-					res.send({ success: true });
+			console.log(doc);
+			var mod = Category.findById(doc._id, function(err, mod) {
+				if(err || !mod) {
+					// Error or none
+					res.send({ success: false });
+					return ;
 				}
+				mod.title = doc.title;
+				mod.lastModify = new Date();
+				mod.increment();
+				mod.save(function(err) {
+					if(err) {
+						next(err);
+					} else if(--count === 0) {
+						res.send({ success: true });
+					}
+				});
 			});
 		});
 	});

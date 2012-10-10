@@ -1,7 +1,6 @@
 
 var mongoose = require("mongoose");
-var ObjectId = mongoose.Types.ObjectId;
-
+var ObjectId = mongoose.Schema.Types.ObjectId;
 var schema = mongoose.Schema({
 	parentId: String,
 	title: String,
@@ -12,6 +11,10 @@ var schema = mongoose.Schema({
 	sortNo: {
 		"type": Number,
 		"default": 0
+	},
+	author: {
+		"type": ObjectId,
+		"ref": "User"
 	}
 });
 
@@ -20,3 +23,4 @@ schema.methods.test = function() {
 };
 
 module.exports = schema;
+// module.exports = mongoose.model("Category", schema);

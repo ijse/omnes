@@ -36,11 +36,22 @@ Ext.define("Omnes.view.category.Tree", {
 		dataIndex: 'title',
 		flex: 1
 	}, {
+		header: '作者',
+		dataIndex: 'author',
+		renderer: function(value) {
+			return value.name;
+		}
+	}, {
 		xtype:'datecolumn',
 		header: '最后更新',
 		dataIndex: 'lastModify',
-		format:'Y-m-d H:i:s',
-		width: 150
+		width: 150,
+		renderer: function(value, metaData, record) {
+			if(!record.data.leaf || !value) {
+				return "";
+			}
+			return Ext.Date.format(value, 'Y-m-d H:i:s');
+		}
 	}],
 	hideHeaders: false,
 
