@@ -5,7 +5,7 @@ var modelMgr = require("../../models");
 var Category = modelMgr.getModel("Category");
 
 module.exports = function(app, path) {
-	
+
 	/**
 	 * Get categories
 	 */
@@ -96,6 +96,6 @@ module.exports = function(app, path) {
 				}
 			});
 		});
-		
+
 	});
 };

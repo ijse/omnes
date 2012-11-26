@@ -75,6 +75,7 @@ module.exports = function(app, path) {
 		UserModel.login(uname, upass).exec(function(err, doc) {
 			if (!!doc[0]) {
 				response.success = true;
+				// Note: Session name: user
 				req.session.user = doc[0];
 			}
 			res.send(response);

@@ -19,16 +19,20 @@
 		<% include frags/authjs.htm %>
 		<!-- End Signin or Login -->
 		<% } %>
-		
+
 		<script type="text/javascript">
 			document.getElementById("loading-text").innerText = "Loading base lib";
 		</script>
-		
+
     	<script src="extjs/ext-debug.js"></script>
 
     	<script type="text/javascript">
 			document.getElementById("loading-text").innerText = "Loading application";
 		</script>
+
+		<!-- Markdown Editor -->
+		<script src="resources/epiceditor/js/epiceditor.min.js"></script>
+
     	<script src="app.js"></script>
     	<% if(Session.user) { %>
     	<script>

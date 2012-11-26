@@ -42,7 +42,6 @@
 					var p = params(obj);
 					// Validate
 
-					var testStr1 = "name=xxx&pass=aaa&pass2=aaa&email=i@ijser.cn";
 					xhrCon.connect("/user/signin", "post", p, function(rp) {
 						var data = eval("(" + rp.responseText + ")");
 						if(data.success == true) {

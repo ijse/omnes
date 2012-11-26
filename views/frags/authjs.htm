@@ -1,7 +1,7 @@
 <script src="XHCon.js"></script>
-<script> 
+<script>
 	(function() {
-		
+
 		var $$= function(select) {
 			var ya = /^([#.])(.*)$/.exec(select);
 			try {
@@ -14,7 +14,7 @@
 		};
 
 		$$("#login-uname").focus();
-		
+
 		$$("#signin-go").onclick = function() {
 			var xhrCon = new XHConn();
 			// Get form data

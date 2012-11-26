@@ -1,16 +1,16 @@
-// useless
-Ext.define("Omnes.store.Users", {
+Ext.define("Omnes.store.Post", {
 	extend: "Ext.data.Store",
-	//fields: ["name", "email"],
-	model: "Omnes.model.User",
+	model: "Omnes.model.Post",
 	autoLoad: true,
 
 	proxy: {
 		type: "ajax",
 		url: "data/users.json",
 		api: {
-			read: "data/users.json",
-			update: "data/updateUsers.json"
+			read: "post/list",
+			update: "post/save",
+			create: "post/add",
+			destroy: "post/delete"
 		},
 		reader: {
 			type: "json",

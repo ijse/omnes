@@ -3,6 +3,6 @@ Ext.application({
 
 	init: function() {
 		console.log("hello!!");
-		
+
 	}
 });

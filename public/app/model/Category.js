@@ -21,14 +21,5 @@ Ext.define("Omnes.model.Category", {
 	}, {
 		name: "author",
 		type: "auto"
-	}],
-	proxy: {
-		type: "ajax",
-		api: {
-			create: "category/save",
-			read: "category/list",
-			update: "category/update",
-			destroy: "category/delete"
-		}
-	}
+	}]
 });

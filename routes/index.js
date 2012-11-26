@@ -9,7 +9,7 @@ var CategoryController = require("./category");
 var UserController = require("./user");
 
 
-app.get(/\/(index|index.html|index.htm)?$/, function(req, res) {
+app.get(/^\/(index|index.html|index.htm)?$/, function(req, res) {
 	// res.redirect("/index.html");
 	res.render("index");
 });
@@ -42,6 +42,12 @@ app.get(path + "/testDel", function(req, res) {
 		console.log(arguments);
 		res.send({ success: true });
 	});
+});
+
+app.get(path + "/test/:name", function(req, res) {
+	var pn = req.params.name;
+	console.log("-=-=-=-=>", __dirname + "..\\public\\test\\" + pn);
+	res.sendfile("D:\\Workspace\\omnes\\public\\test\\" + pn);
 });
 
 UserController(app, "/user");

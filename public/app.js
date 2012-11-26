@@ -18,7 +18,7 @@ Ext.application({
     // 程序基础目录
     appFolder: 'app',
     autoCreateViewport: false,
-    controllers: ["Category"],
+    controllers: ["Category", "ListGrid"],
 
     init: function() {
         // ....
@@ -26,6 +26,8 @@ Ext.application({
         window.initApp = function() {
             // Create viewport
             Ext.create("Omnes.view.Viewport");
-        }
+            // TODO: Create Markdown Editor
+
+        };
     }
 });

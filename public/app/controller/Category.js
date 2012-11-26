@@ -56,6 +56,7 @@ Ext.define('Omnes.controller.Category', {
 	},
 
 	loadArtical: function(selModel, lists) {
+		var id = selModel.selected.items[0].data._id;
 
 	},
 	/**

@@ -1,7 +1,10 @@
 
 Ext.define("Omnes.view.Viewport", {
 	extend: 'Ext.container.Viewport',
-    requires: [ "Omnes.ux.AjaxLoadHtml"],
+    requires: [
+        "Omnes.ux.AjaxLoadHtml",
+        "Omnes.ux.EpicEditor"
+    ],
     height: "100%",
     width: "100%",
     layout: "border",
@@ -41,10 +44,13 @@ Ext.define("Omnes.view.Viewport", {
             width: "100%",
             xtype: 'tabpanel',
             activeTab: 0,
-            items: {
-                title: '欢迎页',
-                html: 'The first tab\'s content. Others may be added dynamically'
-            }
+            items: [{
+                xtype: "listgrid",
+                title: "列表"
+            }, {
+                xtype: "epiceditor",
+                title: "编辑"
+            }]
         }, {
             region: 'south',
             width: "100%",

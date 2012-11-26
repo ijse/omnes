@@ -1,5 +1,5 @@
 Ext.define("Omnes.ux.AjaxLoadHtml", {
-	extends: "Ext.Component",
+	"extends": "Ext.Component",
 	alias: 'plugin.ajaxloadhtml',
 	init: function(ins) {
 		Ext.Ajax.request({
@@ -12,6 +12,5 @@ Ext.define("Omnes.ux.AjaxLoadHtml", {
 
 			}
 		});
-		
 	}
 });
