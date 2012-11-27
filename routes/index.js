@@ -7,6 +7,7 @@ var path = "";
 
 var CategoryController = require("./category");
 var UserController = require("./user");
+var PostController = require("./post");
 
 
 app.get(/^\/(index|index.html|index.htm)?$/, function(req, res) {
@@ -16,7 +17,6 @@ app.get(/^\/(index|index.html|index.htm)?$/, function(req, res) {
 
 app.get("/frags/:fragName", function(req, res) {
 	var fragName = req.param("fragName");
-	console.log(":fragName", fragName);
 	res.render("frags/" + fragName);
 });
 
@@ -52,3 +52,4 @@ app.get(path + "/test/:name", function(req, res) {
 
 UserController(app, "/user");
 CategoryController(app, "/category");
+PostController(app, "/post");

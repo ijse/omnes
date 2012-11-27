@@ -40,16 +40,19 @@ Ext.define("Omnes.view.Viewport", {
             align: 'center'
         },
         items: [{
+            id: "TabView",
             region: "center",
             width: "100%",
             xtype: 'tabpanel',
             activeTab: 0,
             items: [{
                 xtype: "listgrid",
+                itemId: "list",
                 title: "列表"
             }, {
                 xtype: "epiceditor",
-                title: "编辑"
+                itemId: "editor",
+                title: "编辑器"
             }]
         }, {
             region: 'south',

@@ -29,5 +29,15 @@ Ext.define("Omnes.model.Post", {
 		type: "date",
 		defaultValue: new Date(),
 		sortType: "asDate"
-	}]
+	}],
+
+	proxy: {
+		type: "ajax",
+		url: "post/list",
+		api: {
+			create: "post/add",
+			update: "post/save",
+			destroy: "post/delete"
+		}
+	}
 });

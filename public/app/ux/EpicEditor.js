@@ -2,10 +2,6 @@ Ext.define("Omnes.ux.EpicEditor", {
 	extend: 'Ext.container.Container',
 	alias: 'widget.epiceditor',
 	xtype: 'epiceditor',
-	// renderTpl: [
-	// 	'<div id="{id}-body" class="{baseCls}-body {bodyCls}">',
-	// 	'</div>'
-	// ],
 
 	content: "Hello Blank!",
 
@@ -63,10 +59,13 @@ Ext.define("Omnes.ux.EpicEditor", {
 		this.fireEvent('load', this);
 	},
 	setValue: function (filename, content) {
-		editor.importFile(filename, content);
+		this.epicEditor.importFile(filename, content);
 	},
 	getValue: function (filename, type) {
 		this.epicEditor.exportFile(filename, type);
+	},
+	getEditor: function() {
+		return this.epicEditor;
 	},
 	afterLayout: function() {
 		if(!this._fullscreen) {

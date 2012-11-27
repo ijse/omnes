@@ -11,6 +11,8 @@ exports.getModel = function(modelName) {
 	return model;
 };
 
+exports.ObjectId = mongoose.Schema.Types.ObjectId;
+
 exports.initModels = function() {
 	var modelList = [
 		"Category",

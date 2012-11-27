@@ -2,16 +2,19 @@
  * 目录树Controller
  */
 var modelMgr = require("../../models");
-var Post = modelMgr.getModel("Post");
+var PostModel = modelMgr.getModel("Post");
+var CategoryModel = modelMgr.getModel("Category");
+var UserModel = modelMgr.getModel("User");
 
 module.exports = function(app, path) {
 
 	//====
 	//Get post list by category id
 	app.get(path + "/list", function(req, res, next) {
+		console.log("-------");
 		// NOTE: Get categoryId
 		var categoryId = req.params.categoryId;
-		Post.find({"category._id": categoryId })
+		PostModel.find({"category._id": categoryId })
 			.populate("author")
 			.populate("category")
 			.exec(function(err, doc) {
@@ -35,11 +38,11 @@ module.exports = function(app, path) {
 		var categoryId = req.param("caregoryId");
 
 		// Create an empty post model
-		Post.create({
+		PostModel.create({
 			title: "Untitled",
 			content: "Untitled\n===\n",
 			author: author,
-			category: categoryid,
+			category: modelMgr.ObjectId(categoryId),
 			createTime: d,
 			lastUpdate: d
 		}, function(err, doc) {
@@ -56,7 +59,7 @@ module.exports = function(app, path) {
 		var post = req.param("post");
 		post.lastUpdate = new Date();
 
-		var postModel = new Post(post);
+		var postModel = new PostModel(post);
 		postModel.save(function(err, doc) {
 			res.json({
 				success: !!!err,

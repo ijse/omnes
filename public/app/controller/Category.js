@@ -1,11 +1,10 @@
 /**
  * Category Controller
- *
  */
 Ext.define('Omnes.controller.Category', {
 	extend: "Ext.app.Controller",
 
-	stores: ["Category"],
+	stores: ["Category", "Post"],
 	views: ["category.Tree", "category.ContextMenu"],
 	models: ["Category"],
 
@@ -56,7 +55,23 @@ Ext.define('Omnes.controller.Category', {
 	},
 
 	loadArtical: function(selModel, lists) {
-		var id = selModel.selected.items[0].data._id;
+		var tabview = Ext.getCmp("TabView");
+		var listGrid = tabview.getComponent("list");
+		var categoryId = selModel.selected.items[0].data._id;
+		// Switch to listGrid tab
+		tabview.setActiveTab(0);
+
+		// Load post list into grid
+		var PostStore = Ext.data.StoreManager.lookup('Post');
+		PostStore.load({
+			params: {
+				categoryId: categoryId
+			},
+			callback: function() {
+				// Set category id to grid
+				listGrid.setCategoryId(categoryId);
+			}
+		});
 
 	},
 	/**
