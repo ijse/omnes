@@ -50,9 +50,9 @@ Ext.define("Omnes.view.Viewport", {
                 itemId: "list",
                 title: "列表"
             }, {
-                xtype: "epiceditor",
-                itemId: "editor",
-                title: "编辑器"
+                xtype: "editorpanel",
+                title: "编辑器",
+                itemId: "editorPanel"
             }]
         }, {
             region: 'south',

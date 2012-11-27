@@ -18,7 +18,7 @@ Ext.application({
     // 程序基础目录
     appFolder: 'app',
     autoCreateViewport: false,
-    controllers: ["Category", "ListGrid"],
+    controllers: ["Category", "ListGrid", "EpicEditor"],
 
     init: function() {
         // ....

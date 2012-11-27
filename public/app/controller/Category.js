@@ -29,7 +29,8 @@ Ext.define('Omnes.controller.Category', {
 			"categoryTree": {
 				afterrender: me.handleAfterListTreeRender,
 				// listdrop: me.reorderList,
-				selectionchange: me.loadArtical,
+				// selectionchange: me.loadArtical,
+				itemdblclick: me.loadArtical,
 				itemcontextmenu: me.showContextMenu
 			},
 			"categoryContextMenu": {
@@ -54,12 +55,21 @@ Ext.define('Omnes.controller.Category', {
 		});
 	},
 
-	loadArtical: function(selModel, lists) {
+	loadArtical: function(view, record, lists) {
+		if(!record.data.leaf) {
+			return ;
+		}
+		var categoryId = record.data._id;
 		var tabview = Ext.getCmp("TabView");
 		var listGrid = tabview.getComponent("list");
-		var categoryId = selModel.selected.items[0].data._id;
 		// Switch to listGrid tab
 		tabview.setActiveTab(0);
+
+		listGrid.getStore().on("beforeload", function(store, operation) {
+			operation.params = {
+				categoryId: categoryId
+			};
+		});
 
 		// Load post list into grid
 		var PostStore = Ext.data.StoreManager.lookup('Post');

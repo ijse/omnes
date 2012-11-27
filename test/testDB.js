@@ -58,7 +58,7 @@ describe("CategoryModel", function() {
 
 	it("find one category", function(done) {
 		CategoryModel.findOne({
-			title: "Test Category"
+			title: "test:Test Category"
 		}, function(err, doc) {
 			category = doc;
 			if(!err && doc) { done(); }
@@ -98,6 +98,18 @@ describe("PostModel", function() {
 			})
 			.populate("category")
 			.populate("author")
+			.exec(function(err, doc) {
+				if(!err && doc.length) {
+					done();
+				}
+			});
+	});
+
+	it("find anther post with title=test:Another new post", function(done) {
+		PostModel
+			.find({
+				"title": "test:Another new post"
+			})
 			.exec(function(err, doc) {
 				if(!err && doc.length) {
 					done();

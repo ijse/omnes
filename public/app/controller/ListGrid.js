@@ -30,19 +30,12 @@ Ext.define('Omnes.controller.ListGrid', {
 
 		var newrec = Ext.create("Omnes.model.Post", {
 			title: "untitled",
-			author: "ijse",
 			category: categoryId
 		});
 		postStore.add(newrec);
-		newrec.save({
-			callback: function(records, operation, success) {
-				debugger;
-				console.log("----");
-			}
-		});
 		postStore.sync({
 			success: function(batch, options) {
-				debugger;
+				postStore.reload();
 				// switch to editor
 				tabview.setActiveTab(1);
 

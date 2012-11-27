@@ -20,7 +20,7 @@ Ext.define("Omnes.model.Post", {
 		name: "content",
 		type: "string"
 	}, {
-		name: "lastModify",
+		name: "lastUpdate",
 		type: "date",
 		defaultValue: new Date(),
 		sortType: "asDate"
@@ -29,15 +29,5 @@ Ext.define("Omnes.model.Post", {
 		type: "date",
 		defaultValue: new Date(),
 		sortType: "asDate"
-	}],
-
-	proxy: {
-		type: "ajax",
-		url: "post/list",
-		api: {
-			create: "post/add",
-			update: "post/save",
-			destroy: "post/delete"
-		}
-	}
+	}]
 });
