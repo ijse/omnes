@@ -3,7 +3,6 @@
  */
 Ext.define('Omnes.controller.Category', {
 	extend: "Ext.app.Controller",
-
 	stores: ["Category", "Post"],
 	views: ["category.Tree", "category.ContextMenu"],
 	models: ["Category"],

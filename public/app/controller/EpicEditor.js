@@ -5,7 +5,7 @@ Ext.define('Omnes.controller.EpicEditor', {
 	extend: "Ext.app.Controller",
 
 	stores: ["Post"],
-	views: ["listGrid.EpicEditor" ],
+	views: ["editor.EpicEditor" ],
 	models: ["Post"],
 
 	init: function() {
@@ -18,7 +18,8 @@ Ext.define('Omnes.controller.EpicEditor', {
 	},
 
 	savePost: function() {
-		alert("save Post");
+		var postStore = this.getPostStore();
+		// Get editor content
 	}
 
 });

@@ -1,5 +1,5 @@
 /**
- * Category Controller
+ * ListGrid Controller
  *
  */
 Ext.define('Omnes.controller.ListGrid', {

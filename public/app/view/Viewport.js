@@ -1,9 +1,7 @@
-
 Ext.define("Omnes.view.Viewport", {
 	extend: 'Ext.container.Viewport',
     requires: [
-        "Omnes.ux.AjaxLoadHtml",
-        "Omnes.ux.EpicEditor"
+        "Omnes.ux.AjaxLoadHtml"
     ],
     height: "100%",
     width: "100%",
@@ -39,22 +37,16 @@ Ext.define("Omnes.view.Viewport", {
             type: 'border',
             align: 'center'
         },
-        items: [{
-            id: "TabView",
+        items: [
+        {
+            // 主要内容区域
             region: "center",
             width: "100%",
-            xtype: 'tabpanel',
-            activeTab: 0,
-            items: [{
-                xtype: "listgrid",
-                itemId: "list",
-                title: "列表"
-            }, {
-                xtype: "editorpanel",
-                title: "编辑器",
-                itemId: "editorPanel"
-            }]
-        }, {
+            xtype: 'contentview',
+            activeTab: 0
+        },
+        {
+            // 主要内容区域底部附件信息面板
             region: 'south',
             width: "100%",
             title: '附件信息',

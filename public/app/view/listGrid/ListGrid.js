@@ -1,7 +1,6 @@
 Ext.define('Omnes.view.listGrid.ListGrid', {
 	extend: "Ext.grid.Panel",
 	xtype: "listgrid",
-	title: 'Simpsons',
 	store: "Post",
 	columns: [{
 		text: '标题',
